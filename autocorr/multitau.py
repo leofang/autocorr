@@ -44,8 +44,8 @@ def multitau(signal, lags_per_level=16):
     # calculate levels
     levels = np.int_(np.log2(N / m)) + 1
     dims = (a.shape[0], (levels + 1) * (m // 2))
-    g2 = np.zeros(dims, dtype=np.float32)
-    tau = np.zeros(dims[1], dtype=np.float32)
+    g2 = np.zeros_like(a, shape=dims, dtype=np.float32)
+    tau = np.zeros_like(a, shape=(dims[1],), dtype=np.float32)
 
     # zero level
     delta_t = 1
