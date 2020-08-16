@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def multitau(signal, lags_per_level=16):
+def multitau_roi(signal, lags_per_level=16):
     """Autocorrelation of a signal using multi-tau method.
 
     For details, please refer to D. Magatti and F. Ferri doi:10.1364/ao.40.004011
