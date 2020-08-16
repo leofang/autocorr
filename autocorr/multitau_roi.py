@@ -52,10 +52,11 @@ def multitau_roi(signal, lags_per_level=16):
     for i in range(m):
         tau[i] = i * delta_t
         d = a.shape[0]
-        t1 = np.mean(a[:, :N - i])
+        t1 = np.mean(a[:, : N - i])
         t2 = np.mean(a[:, i:])
-        cov = np.diagonal(a[:, :-i].T @ a[:, i:])
+        cov = np.diagonal(a[:, :N-i].T @ a[:, i:])
         g2[i] = np.mean(cov) / t1 / t2/ d
+
     a = (a[:, :N:2] + a[:, 1:N:2]) / 2
     N = even(N // 2)
 
@@ -66,10 +67,11 @@ def multitau_roi(signal, lags_per_level=16):
             shift = m // 2 + n
             tau[idx] = tau[idx - 1] + delta_t
             d = a.shape[0]
-            t1 = np.mean(a[:, :-shift])
+            t1 = np.mean(a[:, : N -shift])
             t2 = np.mean(a[:, shift:])
-            cov = np.diagonal(a[:, :-shift].T @ a[:, shift:])
+            cov = np.diagonal(a[:, : N-shift].T @ a[:, shift:])
             g2[idx] = np.mean(cov) / t1 / t2/ d
+
         a = (a[:, :N:2] + a[:, 1:N:2]) / 2
         N = even(N // 2)
         if N < lags_per_level:
